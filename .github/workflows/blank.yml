@@ -1,3 +1,6 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
 name: Java CI with Gradle
 
 on:
@@ -9,11 +12,11 @@ on:
 jobs:
   build-java:
 
-    runs-on: self-hosted    
+    runs-on: self-hosted
+    
     steps:
-    - name : Telechargement du code source
-      uses: actions/checkout@v4
-      
+    - uses: actions/checkout@v2
+
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -25,12 +28,10 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-  publish :
-    needs: build-java
-    runs-on: self-hosted    
-    steps:
-    - name: Lancement de publication 
-      run: echo "lancons la publication de l'image"
-
-    - name : Lancement de publish
-      run: echo "publication de code" 
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: nanajanashia/demo-app
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
