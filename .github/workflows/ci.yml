@@ -35,7 +35,17 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
         image: najaina23/test
-        tags: v1, latest
+        tags: latest
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+  publish :
+    needs: build-java
+    runs-on: self-hosted    
+    steps:
+    - name: Lancement de publication 
+      run: echo "lancons la publication de l'image"
+
+    - name : Lancement de publish
+      run: echo "publication de code" 
