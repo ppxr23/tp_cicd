@@ -27,7 +27,7 @@ jobs:
 
   publish :
     needs: build-java
-    runs-on: ubuntu-latest    
+    runs-on: self-hosted    
     steps:
     - name: Lancement de publication 
       run: echo "lancons la publication de l'image"
