@@ -36,6 +36,7 @@ jobs:
       with:
         image: najaina23/test
         tags: latest
+        appendMode: true
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
